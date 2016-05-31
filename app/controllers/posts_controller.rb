@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    binding.pry
     @posts = Post.all
   end
 
@@ -20,23 +19,23 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      render action :index
+      redirect_to posts_path
     else
-      render action :new
+      render :new
     end
   end
 
   def update
     if @post.update(post_params)
-      render action :index
+      redirect_to posts_path
     else
-      render action :edit
+      render :edit
     end
   end
 
   def destroy
     @post.destroy
-    render action :index
+    redirect_to posts_path
   end
 
   private
